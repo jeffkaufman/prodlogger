@@ -59,15 +59,15 @@ double system_idle_time() {
 			       IOServiceMatching("IOHIDSystem"),
 			       &iter);
   if (iter == 0) {
-    printf("Error accessing IOHIDSystem\n");
-    exit(1);
+    // Error accessing IOHIDSystem
+    return -1;
   }
 
   curObj = IOIteratorNext(iter);
 
   if (curObj == 0) {
-    printf("Iterator's empty!\n");
-    exit(1);
+    // Iterator's empty!
+    return -1;
   }
 
   CFMutableDictionaryRef properties = 0;
@@ -80,7 +80,7 @@ double system_idle_time() {
     obj = CFDictionaryGetValue(properties, CFSTR("HIDIdleTime"));
     CFRetain(obj);
   } else {
-    printf("Couldn't grab properties of system\n");
+    // Couldn't grab properties of system
     obj = NULL;
   }
 
@@ -108,7 +108,7 @@ double system_idle_time() {
     tHandle >>= 30;
     idle = tHandle;
   } else {
-    printf("Can't find idle time\n");
+    // Can't find idle time
   }
 
   /* Release our resources */
