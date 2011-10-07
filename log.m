@@ -5,26 +5,28 @@
 #include "idler.h"
 
 int main(int argc, char *argv[]) {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  NSFileManager *fileManager;
+  NSRunningApplication *app;
+  NSEnumerator *running;
 
-  NSEnumerator *running = [[[NSWorkspace sharedWorkspace]
-			     runningApplications]
-			    objectEnumerator];
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
   NSString *log_fname = [[NSString stringWithString:@"~/.prodlog"]
 			  stringByExpandingTildeInPath];
   NSString *newline = [NSString stringWithString:@"\n"];
   NSString *space = [NSString stringWithString:@" "];
 
-  NSFileManager *fileManager = [NSFileManager defaultManager];
 
+
+  fileManager = [NSFileManager defaultManager];
   if (![fileManager fileExistsAtPath:log_fname]) {
     [fileManager createFileAtPath:log_fname contents:nil attributes:nil];
   }
 
   NSFileHandle *output = [NSFileHandle fileHandleForWritingAtPath:log_fname];
 
-  NSRunningApplication *app;
+
+  running = [[[NSWorkspace sharedWorkspace] runningApplications] objectEnumerator];
   while ((app = [running nextObject])) {
     if (app.active) {
       NSString *now = [NSString stringWithFormat:@"%0.0f",
