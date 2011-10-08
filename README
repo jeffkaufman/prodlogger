@@ -36,7 +36,7 @@ Observe:
   1318029690 2 loginwindow
   1318029691 3 loginwindow
 
-Each file should hold up to 10k samples and represent about five hours.  In a year you
+Each file should hold up to 10k samples and represent about three hours.  In a year you
 should use about 30MB.
 
 
