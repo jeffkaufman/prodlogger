@@ -1,4 +1,10 @@
-// gcc -o log log.m -framework Foundation -framework AppKit -framework IOKit -Wall
+/* gcc -o prodlog log.m -framework Foundation -framework AppKit -framework IOKit -Wall
+ *
+ * 2011-10-07  Jeff Kaufman
+ *
+ * Released into the public domain.
+ */
+
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #include <IOKit/IOKitLib.h>

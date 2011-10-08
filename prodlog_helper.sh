@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# 2011-10-07  Jeff Kaufman
+#
+# Released into the public domain.
+
 DIR=~/.prodlog
 LOCKDIR=~/.prodlog/lock
 PIDFILE=~/.prodlog/lock/pid
