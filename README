@@ -1,0 +1,50 @@
+prodlogger
+----------
+
+Compilation:
+
+  $ gcc -o prodlog log.m -framework Foundation -framework AppKit -framework IOKit -Wall
+
+Installation:
+
+  $ sudo mv prodlog prodlog_helper.sh /usr/local/bin/
+
+Testing:
+
+  $ prodlog
+  1318078591 0 Terminal # format is epoch timestamp, seconds idle, active app name
+
+Run automatically:
+
+  $ crontab -e
+  * * * * * /usr/local/bin/prodlog_helper.sh
+
+Observe:
+
+  $ ls ~/.prodlog/
+  131800.log.gz   # past files are gzip compressed
+  131801.log.gz   
+  131802.log.gz
+  131803.log.gz
+  131804.log.gz
+  131807.log      # current file is not compressed
+  lock
+
+  $ zless ~/.prodlog/131802.log.gz  | tail -n 4
+  1318029688 0 Google Chrome
+  1318029689 1 Google Chrome
+  1318029690 2 loginwindow
+  1318029691 3 loginwindow
+
+Each file should hold up to 10k samples and represent about five hours.  In a year you
+should use about 30MB.
+
+
+licensing
+---------
+
+idler.h  
+ - see copyright notice in the file
+
+log.m, prodlog_helper.sh
+ - I release these into the public domain
